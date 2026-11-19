@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JulyPie | Домашняя кондитерская в Хабаровске</title>
-    <!-- Подключаем шрифты от Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        /* --- БАЗОВЫЕ НАСТРОЙКИ И ЦВЕТА --- */
         :root {
             --bg: #FDF6F0;
             --accent: #F4C2C2;
@@ -17,324 +15,94 @@
             --gold: #C9A227;
             --white: #FFFFFF;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-        }
-        .logo-font {
-            font-family: 'Great Vibes', cursive;
-            color: var(--gold);
-        }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .btn {
-            display: inline-block;
-            background-color: var(--gold);
-            color: var(--white);
-            padding: 12px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background-color: #b08d1d;
-            transform: translateY(-2px);
-        }
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 40px;
-            color: var(--text);
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 2px;
-            background-color: var(--gold);
-            margin: 15px auto 0;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
+        .logo-font { font-family: 'Great Vibes', cursive; color: var(--gold); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; background-color: var(--gold); color: var(--white); padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; font-size: 16px; }
+        .btn:hover { background-color: #b08d1d; transform: translateY(-2px); }
+        .section-title { text-align: center; font-size: 36px; margin-bottom: 40px; color: var(--text); }
+        .section-title::after { content: ''; display: block; width: 60px; height: 2px; background-color: var(--gold); margin: 15px auto 0; }
 
         /* --- ШАПКА --- */
-        header {
-            background-color: var(--white);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 32px;
-        }
-        .header-contacts {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-        .header-phone {
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-        }
-        .header-phone:hover {
-            color: var(--gold);
-        }
+        header { background-color: var(--white); padding: 15px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 32px; }
+        .header-contacts { display: flex; align-items: center; gap: 20px; }
+        .header-phone { font-weight: 600; color: var(--text); text-decoration: none; }
+        .header-phone:hover { color: var(--gold); }
 
-        /* --- ГЕРОЙ (ГЛАВНЫЙ ЭКРАН) --- */
-        .hero {
-            padding: 80px 0;
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        .hero-text {
-            flex: 1;
-        }
-        .hero-text h1 {
-            font-size: 48px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-        }
-        .hero-text p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        .hero-image {
-            flex: 1;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-height: 500px;
-        }
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            object-fit: cover;
-        }
+        /* --- ГЕРОЙ --- */
+        .hero { padding: 80px 0; display: flex; align-items: center; gap: 50px; }
+        .hero-text { flex: 1; }
+        .hero-text h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
+        .hero-text p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+        .hero-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 500px; }
+        .hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
         /* --- О НАС --- */
-        .about {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-        .about-item h3 {
-            color: var(--gold);
-            margin-bottom: 10px;
-            font-size: 22px;
-        }
+        .about { padding: 80px 0; background-color: var(--white); }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+        .about-item h3 { color: var(--gold); margin-bottom: 10px; font-size: 22px; }
 
         /* --- МЕНЮ --- */
-        .menu {
-            padding: 80px 0;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .card {
-            background-color: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        .card-img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 25px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .card-title {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        .card-desc {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-bottom: 20px;
-            flex: 1;
-        }
-        .card-price {
-            font-weight: 600;
-            font-size: 18px;
-            color: var(--gold);
-        }
+        .menu { padding: 80px 0; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background-color: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .card-img { width: 100%; height: 250px; object-fit: cover; }
+        .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 22px; margin-bottom: 10px; }
+        .card-desc { font-size: 14px; opacity: 0.8; margin-bottom: 20px; flex: 1; }
+        .card-price { font-weight: 600; font-size: 18px; color: var(--gold); }
 
         /* --- ДОСТАВКА --- */
-        .delivery {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-        .delivery-info {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 16px;
-        }
-        .delivery-info p {
-            margin-bottom: 15px;
-        }
+        .delivery { padding: 80px 0; background-color: var(--white); }
+        .delivery-info { max-width: 700px; margin: 0 auto; text-align: center; font-size: 16px; }
+        .delivery-info p { margin-bottom: 15px; }
 
         /* --- ФОРМА ЗАКАЗА --- */
-        .order-form {
-            padding: 80px 0;
-            background-color: var(--accent);
-        }
-        .form-wrapper {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-        }
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-        .checkbox-group input {
-            margin-top: 3px;
-        }
-        .form-wrapper .btn {
-            width: 100%;
-        }
+        .order-form { padding: 80px 0; background-color: var(--accent); }
+        .form-wrapper { max-width: 600px; margin: 0 auto; background-color: var(--white); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 16px; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
+        .checkbox-group input { margin-top: 3px; }
+        .form-wrapper .btn { width: 100%; }
 
-        /* --- КОНТАКТЫ --- */
-        .contacts {
-            padding: 80px 0;
-            text-align: center;
-        }
-        .contacts-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 600;
-            font-size: 18px;
-        }
-        .contact-link:hover {
-            color: var(--gold);
-        }
-        .schedule {
-            margin-top: 20px;
-            font-size: 16px;
-            opacity: 0.8;
-        }
+        /* --- КОНТАКТЫ И КАРТА --- */
+        .contacts { padding: 80px 0; text-align: center; }
+        .contacts-links { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
+        .contact-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 600; font-size: 18px; }
+        .contact-link:hover { color: var(--gold); }
+        .schedule { margin-top: 20px; font-size: 16px; opacity: 0.8; }
+        .map-container { margin-top: 40px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* --- ФУТЕР --- */
-        footer {
-            background-color: var(--text);
-            color: var(--white);
-            padding: 30px 0;
-            text-align: center;
-            font-size: 12px;
-        }
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+        footer { background-color: var(--text); color: var(--white); padding: 30px 0; text-align: center; font-size: 12px; }
+        footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
+        footer a:hover { text-decoration: underline; }
 
-        /* --- АДАПТИВНОСТЬ (МОБИЛЬНАЯ ВЕРСИЯ) --- */
+        /* --- МОДАЛЬНОЕ ОКНО (ПОЛИТИКА) --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: var(--white); padding: 40px; border-radius: 20px; max-width: 700px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; }
+        .modal-content h2 { margin-bottom: 20px; font-size: 24px; }
+        .modal-content p { margin-bottom: 15px; font-size: 14px; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text); background: none; border: none; }
+        .close-modal:hover { color: var(--gold); }
+
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                padding: 40px 0;
-                text-align: center;
-            }
-            .hero-text h1 {
-                font-size: 32px;
-            }
-            .header-contacts .btn {
-                display: none;
-            }
-            .header-contacts {
-                gap: 10px;
-            }
-            .logo {
-                font-size: 24px;
-            }
-            .section-title {
-                font-size: 28px;
-            }
-            .form-wrapper {
-                padding: 25px 15px;
-            }
+            .hero { flex-direction: column; padding: 40px 0; text-align: center; }
+            .hero-text h1 { font-size: 32px; }
+            .header-contacts .btn { display: none; }
+            .header-contacts { gap: 10px; }
+            .logo { font-size: 24px; }
+            .section-title { font-size: 28px; }
+            .form-wrapper { padding: 25px 15px; }
+            .modal-content { padding: 25px 15px; }
         }
     </style>
 </head>
@@ -359,7 +127,6 @@
             <a href="#order" class="btn">Выбрать десерт</a>
         </div>
         <div class="hero-image">
-            <!-- ТВОЕ ГЛАВНОЕ ФОТО -->
             <img src="hero-main.jpg" alt="Бенто-торт с розами">
         </div>
     </section>
@@ -389,8 +156,6 @@
     <section class="menu container">
         <h2 class="section-title">Наше меню</h2>
         <div class="menu-grid">
-            
-            <!-- Карточка 1 -->
             <div class="card">
                 <img src="cake-vanilla.jpg" alt="Торт" class="card-img">
                 <div class="card-content">
@@ -399,8 +164,6 @@
                     <div class="card-price">от 3 500 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 2 -->
             <div class="card">
                 <img src="cake-chocolate.jpg" alt="Торт" class="card-img">
                 <div class="card-content">
@@ -409,8 +172,6 @@
                     <div class="card-price">от 4 000 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 3 -->
             <div class="card">
                 <img src="bento-pink-garden.jpg" alt="Бенто" class="card-img">
                 <div class="card-content">
@@ -419,8 +180,6 @@
                     <div class="card-price">от 1 200 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 4 -->
             <div class="card">
                 <img src="bento-strawberry.jpg" alt="Бенто" class="card-img">
                 <div class="card-content">
@@ -429,8 +188,6 @@
                     <div class="card-price">от 1 300 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 5 -->
             <div class="card">
                 <img src="bento-pistachio.jpg" alt="Бенто" class="card-img">
                 <div class="card-content">
@@ -439,8 +196,6 @@
                     <div class="card-price">от 1 400 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 6 -->
             <div class="card">
                 <img src="cupcakes-assorted.jpg" alt="Капкейки" class="card-img">
                 <div class="card-content">
@@ -449,8 +204,6 @@
                     <div class="card-price">от 1 200 ₽</div>
                 </div>
             </div>
-
-            <!-- Карточка 7 -->
             <div class="card">
                 <img src="dessert-pavlova.jpg" alt="Десерт" class="card-img">
                 <div class="card-content">
@@ -459,7 +212,6 @@
                     <div class="card-price">от 350 ₽</div>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -510,12 +262,10 @@
                         <label for="comment">Комментарий</label>
                         <textarea id="comment" rows="3" placeholder="Пожелания по декору, начинке и т.д."></textarea>
                     </div>
-                    
                     <div class="checkbox-group">
                         <input type="checkbox" id="agree" required>
                         <label for="agree">Я согласен(на) на обработку персональных данных и принимаю условия политики конфиденциальности.</label>
                     </div>
-
                     <button type="submit" class="btn">Отправить заявку</button>
                 </form>
             </div>
@@ -541,7 +291,12 @@
                 <p>График работы: 10:00 – 18:00 (Воскресенье — выходной)</p>
                 <p>Самовывоз по предварительной записи (г. Хабаровск)</p>
             </div>
-            <!-- Сюда потом вставим Яндекс.Карту -->
+            
+            <!-- КАРТА -->
+            <div class="map-container">
+                <!-- ВНИМАНИЕ: Замените адрес в ссылке ниже на реальный адрес самовывоза -->
+                <iframe src="https://yandex.ru/map-widget/v1/?text=Хабаровск,%20ул.%20Пушкина,%2050&z=16" width="100%" height="400" frameborder="0" allowfullscreen="true"></iframe>
+            </div>
         </div>
     </section>
 
@@ -550,12 +305,27 @@
         <div class="container">
             <p>&copy; 2024 JulyPie. Все права защищены.</p>
             <p style="margin-top: 5px;">ИП Иванова И.И. | ИНН 272348857 (пример)</p>
-            <p style="margin-top: 5px;"><a href="#">Политика конфиденциальности</a></p>
+            <p style="margin-top: 5px;"><a href="#" id="privacy-link">Политика конфиденциальности</a></p>
         </div>
     </footer>
 
-    <!-- СКРИПТ ДЛЯ ФОРМЫ (Пока просто выводит данные в консоль, позже подключим отправку) -->
-            <script>
+    <!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ -->
+    <div class="modal-overlay" id="privacy-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2>Политика конфиденциальности</h2>
+            <p>Настоящая Политика конфиденциальности действует в отношении всей информации, которую сайт JulyPie может получить о Пользователе во время использования сайта.</p>
+            <p><strong>1. Какие данные мы собираем:</strong> При заполнении формы заказа мы собираем ваше имя, номер телефона, адрес доставки и комментарии к заказу.</p>
+            <p><strong>2. Цели сбора:</strong> Данные используются исключительно для связи с вами, уточнения деталей заказа и организации доставки.</p>
+            <p><strong>3. Передача данных:</strong> Мы не передаем ваши данные третьим лицам. Данные передаются напрямую в мессенджер WhatsApp при нажатии кнопки «Отправить заявку».</p>
+            <p><strong>4. Согласие:</strong> Нажимая галочку согласия в форме заказа, вы подтверждаете свое согласие на обработку персональных данных в соответствии с ФЗ-152 «О персональных данных».</p>
+            <p><strong>5. Контакты:</strong> По всем вопросам вы можете связаться с нами по телефону +7 (914) 772-75-92.</p>
+        </div>
+    </div>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        // 1. Скрипт для формы заказа (отправка в WhatsApp)
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
@@ -567,7 +337,6 @@
             const address = document.getElementById('address').value || 'самовывоз';
             const comment = document.getElementById('comment').value || 'нет';
             
-            // Формируем текст сообщения (без эмодзи и с красивыми переносами)
             let message = `Здравствуйте! Хочу сделать заказ в JulyPie.\n\n`;
             message += `Имя: ${name}\n`;
             message += `Телефон: ${phone}\n`;
@@ -577,16 +346,34 @@
             message += `Адрес: ${address}\n`;
             message += `Комментарий: ${comment}`;
             
-            // Твой номер WhatsApp (без плюса и пробелов)
             const myPhone = '79247072002'; 
-            
-            // Кодируем текст для передачи в ссылку
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${myPhone}?text=${encodedMessage}`;
-            
             window.open(whatsappUrl, '_blank');
-            
             this.reset();
+        });
+
+        // 2. Скрипт для модального окна политики
+        const modal = document.getElementById('privacy-modal');
+        const privacyLink = document.getElementById('privacy-link');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        // Открыть окно
+        privacyLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+        });
+
+        // Закрыть окно по крестику
+        closeModalBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Закрыть окно по клику вне его (на темный фон)
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
         });
     </script>
 </body>
