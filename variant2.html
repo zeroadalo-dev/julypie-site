@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JulyPie | Вариант 2</title>
+    <title>JulyPie | Домашняя кондитерская в Хабаровске</title>
     
+    <!-- ИКОНКА САЙТА -->
     <link rel="icon" href="favicon.png" type="image/png">
 
+    <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
+    <!-- БИБЛИОТЕКА АНИМАЦИИ -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -23,6 +26,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        /* --- ГЛОБАЛЬНЫЙ ФОН --- */
         body { 
             font-family: 'Montserrat', sans-serif; 
             color: var(--text); 
@@ -34,6 +38,7 @@
             background-color: var(--bg);
         }
 
+        /* Полупрозрачный слой */
         body::before {
             content: '';
             position: fixed;
@@ -60,7 +65,7 @@
         .header-phone { font-weight: 600; color: var(--text); text-decoration: none; }
         .header-phone:hover { color: var(--gold); }
 
-        /* --- ГЕРОЙ (ВАРИАНТ 2 - КРУГЛОЕ ФОТО) --- */
+        /* --- ГЕРОЙ --- */
         .hero { padding: 80px 0; display: flex; align-items: center; gap: 50px; }
         .hero-text { flex: 1; }
         .hero-text h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
@@ -69,17 +74,9 @@
         .hero-line-1 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
         .hero-line-italic { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--text); line-height: 1.5; opacity: 0.9; }
 
-        /* Новые стили для круглого фото */
-        .hero-image { 
-            flex: 1; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .hero-image { flex: 1; display: flex; justify-content: center; align-items: center; }
         .hero-image img { 
-            width: 400px; 
-            height: 400px; 
-            object-fit: cover; 
+            width: 400px; height: 400px; object-fit: cover; 
             border-radius: 50%;
             border: 8px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 0 4px var(--gold), 0 15px 35px rgba(0,0,0,0.2);
@@ -102,10 +99,22 @@
         .card-desc { font-size: 14px; opacity: 0.8; margin-bottom: 20px; flex: 1; }
         .card-price { font-weight: 600; font-size: 18px; color: var(--gold); }
 
-        /* --- ДОСТАВКА --- */
-        .delivery { padding: 80px 0; }
-        .delivery-info { max-width: 700px; margin: 0 auto; text-align: center; font-size: 16px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255, 255, 255, 0.6); }
-        .delivery-info p { margin-bottom: 15px; }
+        /* --- КНОПКА В КАРТОЧКЕ И КОРЗИНА --- */
+        .order-btn { width: 100%; margin-top: 15px; padding: 10px 20px; font-size: 15px; background-color: transparent; color: var(--gold); border: 2px solid var(--gold); transition: 0.3s; }
+        .order-btn:hover { background-color: var(--gold); color: var(--white); }
+        .order-btn.added { background-color: var(--gold); color: var(--white); }
+
+        .cart-panel {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background-color: var(--text); color: var(--white); padding: 15px 30px;
+            border-radius: 30px; display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1000;
+            transition: bottom 0.4s ease; width: 90%; max-width: 500px; justify-content: space-between;
+        }
+        .cart-panel.show { bottom: 30px; }
+        .cart-panel-info { font-size: 14px; font-weight: 600; }
+        .cart-panel .btn { padding: 8px 15px; font-size: 14px; background-color: var(--gold); color: var(--text); }
+        .cart-panel .btn:hover { background-color: var(--white); }
 
         /* --- ФОРМА ЗАКАЗА --- */
         .order-form { padding: 80px 0; }
@@ -114,6 +123,48 @@
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
         .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 16px; background-color: rgba(255, 255, 255, 0.8); }
         .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); background-color: var(--white); }
+        
+        /* Блок выбранных товаров в форме */
+        .selected-items-block {
+            background-color: rgba(244, 194, 194, 0.2);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .selected-items-block h4 { margin-bottom: 10px; font-size: 16px; color: var(--gold); }
+        .cart-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+        }
+        .cart-item-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .cart-item-name { font-size: 14px; font-weight: 600; flex: 1; padding-right: 10px; }
+        
+        /* Поле ввода количества */
+        .cart-item-qty-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cart-item-qty { 
+            width: 70px; 
+            padding: 5px; 
+            text-align: center; 
+            border: 1px solid var(--gold); 
+            border-radius: 5px; 
+            font-size: 14px; 
+        }
+        .cart-item-unit {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
         .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
         .checkbox-group input { margin-top: 3px; }
         .form-wrapper .btn { width: 100%; }
@@ -144,21 +195,6 @@
         .scroll-top.show { opacity: 1; visibility: visible; }
         .scroll-top:hover { background-color: #b08d1d; transform: translateY(-5px); }
 
-        /* Стили для кнопки в карточке товара */
-        .order-btn {
-            width: 100%;
-            margin-top: 15px;
-            padding: 10px 20px;
-            font-size: 15px;
-            background-color: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-        }
-        .order-btn:hover {
-            background-color: var(--gold);
-            color: var(--white);
-        }
-
         /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 768px) {
             .hero { flex-direction: column; padding: 40px 0; text-align: center; }
@@ -171,12 +207,10 @@
             .modal-content { padding: 25px 15px; }
             .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
             body { background-attachment: scroll; }
+            .hero-image img { width: 300px; height: 300px; }
             
-            /* Уменьшаем круглое фото на телефонах */
-            .hero-image img {
-                width: 300px;
-                height: 300px;
-            }
+            .cart-panel { padding: 12px 20px; flex-direction: column; gap: 10px; text-align: center; }
+            .cart-panel.show { bottom: 15px; }
         }
     </style>
 </head>
@@ -197,12 +231,10 @@
     <section class="hero container" data-aos="fade-up">
         <div class="hero-text">
             <h1>Печем счастье по домашним рецептам</h1>
-            
             <div class="hero-subtitle">
                 <p class="hero-line-1">Торты, бенто, капкейки и десерты на заказ.</p>
                 <p class="hero-line-italic">Маленькие партии, натуральные ингредиенты<br>и тепло рук, которые их сделали.</p>
             </div>
-            
             <a href="#order" class="btn">Выбрать десерт</a>
         </div>
         <div class="hero-image">
@@ -235,14 +267,15 @@
     <section class="menu container">
         <h2 class="section-title" data-aos="fade-up">Наше меню</h2>
         <div class="menu-grid">
+            
+            <!-- ТОРТЫ (кг) -->
             <div class="card" data-aos="fade-up">
                 <img src="cake-vanilla.jpg" alt="Торт" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">Торт «Ванильный пломбир»</h3>
                     <p class="card-desc">Нежные ванильные коржи, крем-чиз на основе сливочного сыра и сливок, украшение из свежих ягод.</p>
-                    <div class="card-price">от 3 500 ₽</div>
-             <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»">Заказать</button>
+                    <div class="card-price">от 3 500 ₽/кг</div>
+                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»" data-unit="кг">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -250,19 +283,19 @@
                 <div class="card-content">
                     <h3 class="card-title">Торт «Шоколадный трюфель»</h3>
                     <p class="card-desc">Влажные шоколадные коржи на основе какао, крем из темного шоколада и сливок, трюфельная крошка.</p>
-                    <div class="card-price">от 4 000 ₽</div>
-             <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»">Заказать</button>
+                    <div class="card-price">от 4 000 ₽/кг</div>
+                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»" data-unit="кг">Заказать</button>
                 </div>
             </div>
+
+            <!-- БЕНТО (шт) -->
             <div class="card" data-aos="fade-up" data-aos-delay="200">
                 <img src="bento-pink-garden.jpg" alt="Бенто" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">Бенто «Розовый сад»</h3>
                     <p class="card-desc">Маленький торт с ванильным бисквитом, кремом из маскарпоне и декором из розового крема.</p>
                     <div class="card-price">от 1 200 ₽</div>
-              <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                <button class="btn order-btn" data-product="Бенто «Розовый сад»">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Розовый сад»" data-unit="шт.">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -271,8 +304,7 @@
                     <h3 class="card-title">Бенто «Клубника-сливки»</h3>
                     <p class="card-desc">Легкий бисквит, взбитые сливки и свежая клубника. Идеальный вариант для маленького праздника.</p>
                     <div class="card-price">от 1 300 ₽</div>
-               <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»" data-unit="шт.">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -281,18 +313,18 @@
                     <h3 class="card-title">Бенто «Фисташка-малина»</h3>
                     <p class="card-desc">Фисташковый бисквит, крем с пастой из фисташек и малиновый конфитюр внутри.</p>
                     <div class="card-price">от 1 400 ₽</div>
-               <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»" data-unit="шт.">Заказать</button>
                 </div>
             </div>
+
+            <!-- КАПКЕЙКИ И ДЕСЕРТЫ (шт) -->
             <div class="card" data-aos="fade-up" data-aos-delay="200">
                 <img src="cupcakes-assorted.jpg" alt="Капкейки" class="card-img">
                 <div class="card-content">
                     <h3 class="card-title">Капкейки «Ассорти»</h3>
                     <p class="card-desc">Набор из 6 капкейков: ваниль, шоколад и клубника. Нежный крем-чиз и ягодный декор. (Цена за набор).</p>
                     <div class="card-price">от 1 200 ₽</div>
-                <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Капкейки «Ассорти»">Заказать</button>
+                    <button class="btn order-btn" data-product="Капкейки «Ассорти»" data-unit="набор">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -301,12 +333,17 @@
                     <h3 class="card-title">Десерт «Павлова»</h3>
                     <p class="card-desc">Хрустящая меренга, нежный сливочный крем и свежие сезонные фрукты. (Цена за 1 шт).</p>
                     <div class="card-price">от 350 ₽</div>
-                <!-- ДОБАВЛЯЕМ КНОПКУ -->
-                    <button class="btn order-btn" data-product="Десерт «Павлова»">Заказать</button>
+                    <button class="btn order-btn" data-product="Десерт «Павлова»" data-unit="шт.">Заказать</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ПАНЕЛЬ КОРЗИНЫ -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-panel-info">Выбрано товаров: <span id="cartCount">0</span></div>
+        <button class="btn" id="goToOrderBtn">Оформить заказ</button>
+    </div>
 
     <!-- ДОСТАВКА -->
     <section class="delivery">
@@ -327,6 +364,15 @@
             <div class="form-wrapper" data-aos="zoom-in">
                 <h2 class="section-title" style="font-size: 28px; margin-bottom: 30px;">Оставить заявку</h2>
                 <form id="orderForm">
+                    
+                    <!-- Блок с выбранными товарами -->
+                    <div class="selected-items-block" id="selectedItemsBlock">
+                        <h4>Ваш заказ:</h4>
+                        <div id="selectedItemsList">
+                            <!-- Сюда скрипт будет добавлять строки с товарами -->
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="name">Ваше имя *</label>
                         <input type="text" id="name" required placeholder="Как к вам обращаться?">
@@ -334,14 +380,6 @@
                     <div class="form-group">
                         <label for="phone">Телефон *</label>
                         <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__">
-                    </div>
-                    <div class="form-group">
-                        <label for="product">Что заказать? *</label>
-                        <input type="text" id="product" required placeholder="Например: Бенто «Розовый сад»">
-                    </div>
-                    <div class="form-group">
-                        <label for="weight">Вес или количество (шт.)</label>
-                        <input type="text" id="weight" placeholder="Например: 1 кг или 6 шт">
                     </div>
                     <div class="form-group">
                         <label for="date">Дата изготовления</label>
@@ -414,28 +452,130 @@
         </div>
     </div>
 
+    <!-- КНОПКА НАВЕРХ -->
     <a href="#" class="scroll-top" id="scrollTopBtn">↑</a>
 
+    <!-- БИБЛИОТЕКА АНИМАЦИИ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
         AOS.init({ duration: 800, once: true });
 
+        // --- ЛОГИКА КОРЗИНЫ ---
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const cartPanel = document.getElementById('cartPanel');
+        const cartCountSpan = document.getElementById('cartCount');
+        const goToOrderBtn = document.getElementById('goToOrderBtn');
+        const orderSection = document.getElementById('order');
+        
+        const selectedItemsBlock = document.getElementById('selectedItemsBlock');
+        const selectedItemsList = document.getElementById('selectedItemsList');
+
+        // Теперь храним не просто названия, а объекты {name, unit}
+        let selectedProducts = []; 
+
+        orderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-product');
+                const productUnit = this.getAttribute('data-unit'); // Получаем единицу измерения (кг или шт)
+                
+                if (this.classList.contains('added')) {
+                    this.classList.remove('added');
+                    this.textContent = 'Заказать';
+                    selectedProducts = selectedProducts.filter(item => item.name !== productName);
+                } else {
+                    this.classList.add('added');
+                    this.textContent = 'Добавлено ✓';
+                    selectedProducts.push({ name: productName, unit: productUnit });
+                }
+
+                cartCountSpan.textContent = selectedProducts.length;
+
+                if (selectedProducts.length > 0) {
+                    cartPanel.classList.add('show');
+                } else {
+                    cartPanel.classList.remove('show');
+                }
+            });
+        });
+
+        goToOrderBtn.addEventListener('click', function() {
+            renderCartInForm();
+            orderSection.scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                document.getElementById('name').focus();
+            }, 800);
+        });
+
+        // Функция отрисовки списка товаров с правильными единицами измерения
+        function renderCartInForm() {
+            if (selectedProducts.length === 0) {
+                selectedItemsBlock.style.display = 'none';
+                return;
+            }
+
+            selectedItemsBlock.style.display = 'block';
+            selectedItemsList.innerHTML = '';
+
+            selectedProducts.forEach((product, index) => {
+                const row = document.createElement('div');
+                row.className = 'cart-item-row';
+                
+                // Если это торт (кг), ставим шаг 0.5 и минимум 1
+                // Если штуки, ставим шаг 1 и минимум 1
+                const isWeight = product.unit === 'кг';
+                const step = isWeight ? '0.5' : '1';
+                const min = isWeight ? '1' : '1'; 
+
+                                row.innerHTML = `
+                    <span class="cart-item-name">${product.name}</span>
+                    <div class="cart-item-qty-wrapper">
+                        <input type="number" 
+                               class="cart-item-qty" 
+                               min="${min}" 
+                               step="${step}" 
+                               value="${isWeight ? '1.5' : '1'}" 
+                               data-name="${product.name}" 
+                               data-unit="${product.unit}"
+                               id="qty-${index}"
+                               oninvalid="this.setCustomValidity('${isWeight ? 'Укажите вес торта кратно 0,5 кг' : 'Укажите целое количество штук'}')"
+                               oninput="this.setCustomValidity('')">
+                        <span class="cart-item-unit">${product.unit}</span>
+                    </div>
+                `;
+                selectedItemsList.appendChild(row);
+            });
+        }
+
+        // --- ОТПРАВКА ФОРМЫ В WHATSAPP ---
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
+            
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const product = document.getElementById('product').value;
-            const weight = document.getElementById('weight').value || 'не указан';
             const date = document.getElementById('date').value || 'не указана';
             const address = document.getElementById('address').value || 'самовывоз';
             const comment = document.getElementById('comment').value || 'нет';
             
+            let orderDetails = '';
+            const qtyInputs = document.querySelectorAll('.cart-item-qty');
+            
+            if (qtyInputs.length > 0) {
+                qtyInputs.forEach(input => {
+                    const prodName = input.getAttribute('data-name');
+                    const prodUnit = input.getAttribute('data-unit');
+                    const qty = input.value;
+                    orderDetails += `- ${prodName} — ${qty} ${prodUnit}\n`;
+                });
+            } else {
+                orderDetails = 'Корзина пуста\n';
+            }
+            
             let message = `Здравствуйте! Хочу сделать заказ в JulyPie.\n\n`;
             message += `Имя: ${name}\n`;
-            message += `Телефон: ${phone}\n`;
-            message += `Заказ: ${product}\n`;
-            message += `Вес/Кол-во: ${weight}\n`;
+            message += `Телефон: ${phone}\n\n`;
+            message += `Заказ:\n${orderDetails}\n`;
             message += `Дата: ${date}\n`;
             message += `Адрес: ${address}\n`;
             message += `Комментарий: ${comment}`;
@@ -444,9 +584,21 @@
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/${myPhone}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
+            
+            // Очистка
             this.reset();
+            selectedProducts = [];
+            cartCountSpan.textContent = '0';
+            cartPanel.classList.remove('show');
+            selectedItemsBlock.style.display = 'none';
+            
+            orderButtons.forEach(btn => {
+                btn.classList.remove('added');
+                btn.textContent = 'Заказать';
+            });
         });
 
+        // --- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ ---
         const modal = document.getElementById('privacy-modal');
         const privacyLink = document.getElementById('privacy-link');
         const closeModalBtn = document.getElementById('close-modal');
@@ -455,6 +607,7 @@
         closeModalBtn.addEventListener('click', function() { modal.style.display = 'none'; });
         modal.addEventListener('click', function(e) { if (e.target === modal) { modal.style.display = 'none'; } });
 
+        // --- КНОПКА НАВЕРХ ---
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) { scrollTopBtn.classList.add('show'); } else { scrollTopBtn.classList.remove('show'); }
@@ -462,28 +615,6 @@
         scrollTopBtn.addEventListener('click', function(e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-                // Логика для кнопок "Заказать" в карточках
-        const orderButtons = document.querySelectorAll('.order-btn');
-        const productInput = document.getElementById('product');
-        const orderSection = document.getElementById('order');
-
-        orderButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Получаем название товара из атрибута data-product
-                const productName = this.getAttribute('data-product');
-                
-                // Вписываем его в поле "Что заказать?"
-                productInput.value = productName;
-                
-                // Плавно прокручиваем к форме
-                orderSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Ставим курсор в поле "Имя", чтобы клиенту было удобно печатать
-                setTimeout(() => {
-                    document.getElementById('name').focus();
-                }, 800); // Задержка, чтобы прокрутка успела завершиться
-            });
         });
     </script>
 </body>
