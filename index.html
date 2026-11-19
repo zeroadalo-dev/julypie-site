@@ -68,7 +68,29 @@
         .hero { padding: 80px 0; display: flex; align-items: center; gap: 50px; }
         .hero-text { flex: 1; }
         .hero-text h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
-        .hero-text p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
+               /* Новые стили для подзаголовка в герое */
+        .hero-subtitle {
+            margin-bottom: 30px;
+        }
+        .hero-subtitle p {
+            margin-bottom: 5px; /* Небольшой отступ между строками */
+        }
+        .hero-line-1 {
+            font-size: 18px;
+            font-weight: 600; /* Полужирный */
+            color: var(--text);
+        }
+        .hero-line-2 {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .hero-line-3 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic; /* Курсив */
+            font-size: 18px;
+            color: var(--gold); /* Можно сделать золотым для красоты, или оставить основным цветом */
+            opacity: 0.9;
+        }
         .hero-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 500px; background-color: var(--white); }
         .hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
@@ -210,7 +232,11 @@
     <section class="hero container" data-aos="fade-up">
         <div class="hero-text">
             <h1>Печем счастье по домашним рецептам</h1>
-            <p>Торты, бенто, капкейки и десерты на заказ. Маленькие партии, натуральные ингредиенты и тепло рук, которые их сделали.</p>
+                        <div class="hero-subtitle">
+                <p class="hero-line-1">Торты, бенто, капкейки и десерты на заказ.</p>
+                <p class="hero-line-2">Маленькие партии, натуральные ингредиенты</p>
+                <p class="hero-line-3">и тепло рук, которые их сделали.</p>
+            </div>
             <a href="#order" class="btn">Выбрать десерт</a>
         </div>
         <div class="hero-image">
