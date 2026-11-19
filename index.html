@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JulyPie | Домашняя кондитерская в Хабаровске</title>
     
-    <!-- ИКОНКА САЙТА (FAVICON) -->
-    <!-- Если ты назвал файл иначе, поменяй название ниже -->
+    <!-- ИКОНКА САЙТА -->
     <link rel="icon" href="favicon.png" type="image/png">
 
     <!-- ШРИФТЫ -->
@@ -72,19 +71,18 @@
         .delivery-info { max-width: 700px; margin: 0 auto; text-align: center; font-size: 16px; }
         .delivery-info p { margin-bottom: 15px; }
 
-        /* --- ФОРМА ЗАКАЗА --- */
-                /* --- ФОРМА ЗАКАЗА --- */
+        /* --- ФОРМА ЗАКАЗА (СТЕКЛЯННЫЙ ЭФФЕКТ) --- */
         .order-form { 
             padding: 80px 0; 
-            /* Здесь мы ставим фоновое фото. Пока временное. */
-            background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            /* ФОНОВОЕ ФОТО */
+            background-image: url('order-bg.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Эффект, при котором фон не прокручивается (можно убрать) */
+            background-attachment: fixed;
             position: relative;
         }
         
-        /* Добавляем полупрозрачный слой поверх фото, чтобы форма читалась */
+        /* Полупрозрачный слой поверх фото */
         .order-form::before {
             content: '';
             position: absolute;
@@ -92,14 +90,43 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(253, 246, 240, 0.85); /* Кремовый цвет с прозрачностью 85% */
+            background-color: rgba(253, 246, 240, 0.75); /* Кремовый цвет, 75% непрозрачности */
             z-index: 1;
         }
 
         .order-form .container {
             position: relative;
-            z-index: 2; /* Поднимаем форму выше фона */
+            z-index: 2;
         }
+
+        .form-wrapper { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            /* Стеклянный эффект */
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            padding: 40px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group textarea { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 16px; 
+            background-color: rgba(255, 255, 255, 0.9); /* Чуть прозрачные поля ввода */
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
+        .checkbox-group input { margin-top: 3px; }
+        .form-wrapper .btn { width: 100%; }
 
         /* --- КОНТАКТЫ И КАРТА --- */
         .contacts { padding: 80px 0; text-align: center; }
@@ -124,33 +151,14 @@
 
         /* --- КНОПКА "НАВЕРХ" --- */
         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--gold);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s;
-            z-index: 999;
-            font-size: 24px;
+            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+            background-color: var(--gold); color: white; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0; visibility: hidden; transition: 0.3s; z-index: 999; font-size: 24px;
         }
-        .scroll-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .scroll-top:hover {
-            background-color: #b08d1d;
-            transform: translateY(-5px);
-        }
+        .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background-color: #b08d1d; transform: translateY(-5px); }
 
         @media (max-width: 768px) {
             .hero { flex-direction: column; padding: 40px 0; text-align: center; }
@@ -162,6 +170,8 @@
             .form-wrapper { padding: 25px 15px; }
             .modal-content { padding: 25px 15px; }
             .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
+            /* На мобильных убираем фиксацию фона, чтобы не было глюков */
+            .order-form { background-attachment: scroll; }
         }
     </style>
 </head>
@@ -383,21 +393,13 @@
     <!-- КНОПКА НАВЕРХ -->
     <a href="#" class="scroll-top" id="scrollTopBtn">↑</a>
 
-    <!-- ПОДКЛЮЧЕНИЕ БИБЛИОТЕКИ АНИМАЦИИ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- СКРИПТЫ -->
     <script>
-        // 1. Инициализация анимации
-        AOS.init({
-            duration: 800, // Длительность анимации в миллисекундах
-            once: true,    // Анимация срабатывает только один раз
-        });
+        AOS.init({ duration: 800, once: true });
 
-        // 2. Скрипт для формы заказа (отправка в WhatsApp)
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
-            
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const product = document.getElementById('product').value;
@@ -422,45 +424,21 @@
             this.reset();
         });
 
-        // 3. Скрипт для модального окна политики
         const modal = document.getElementById('privacy-modal');
         const privacyLink = document.getElementById('privacy-link');
         const closeModalBtn = document.getElementById('close-modal');
 
-        privacyLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            modal.style.display = 'flex';
-        });
+        privacyLink.addEventListener('click', function(e) { e.preventDefault(); modal.style.display = 'flex'; });
+        closeModalBtn.addEventListener('click', function() { modal.style.display = 'none'; });
+        modal.addEventListener('click', function(e) { if (e.target === modal) { modal.style.display = 'none'; } });
 
-        closeModalBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // 4. Скрипт для кнопки "Наверх"
         const scrollTopBtn = document.getElementById('scrollTopBtn');
-
         window.addEventListener('scroll', function() {
-            // Если прокрутили больше 300 пикселей - показываем кнопку
-            if (window.scrollY > 300) {
-                scrollTopBtn.classList.add('show');
-            } else {
-                scrollTopBtn.classList.remove('show');
-            }
+            if (window.scrollY > 300) { scrollTopBtn.classList.add('show'); } else { scrollTopBtn.classList.remove('show'); }
         });
-
-        // Плавная прокрутка наверх при клике
         scrollTopBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
