@@ -331,11 +331,11 @@
                     </div>
                     <div class="form-group">
                         <label for="product">Что заказать? *</label>
-                        <input type="text" id="product" required placeholder="Выберите товары в меню выше">
+                        <input type="text" id="product" required placeholder="Выберите товары в меню выше или напишите вручную">
                     </div>
                     <div class="form-group">
-                        <label for="weight">Вес или количество (шт.)</label>
-                        <input type="text" id="weight" placeholder="Например: 1 кг или 6 шт">
+                        <label for="weight">Вес (если нужен)</label>
+                        <input type="text" id="weight" placeholder="Например: 1 кг, 1.5 кг или 500 гр">
                     </div>
                     <div class="form-group">
                         <label for="date">Дата изготовления</label>
@@ -452,8 +452,12 @@
         });
 
         goToOrderBtn.addEventListener('click', function() {
-            productInput.value = selectedProducts.join(', ');
+            // Формируем список с "1 шт." по умолчанию
+            const formattedProducts = selectedProducts.map(product => `${product} (1 шт.)`);
+            productInput.value = formattedProducts.join(', ');
+            
             orderSection.scrollIntoView({ behavior: 'smooth' });
+            
             setTimeout(() => {
                 document.getElementById('name').focus();
             }, 800);
@@ -474,7 +478,7 @@
             message += `Имя: ${name}\n`;
             message += `Телефон: ${phone}\n`;
             message += `Заказ: ${product}\n`;
-            message += `Вес/Кол-во: ${weight}\n`;
+            message += `Вес: ${weight}\n`;
             message += `Дата: ${date}\n`;
             message += `Адрес: ${address}\n`;
             message += `Комментарий: ${comment}`;
@@ -485,7 +489,7 @@
             window.open(whatsappUrl, '_blank');
             this.reset();
             
-            // Сбрасываем корзину после отправки
+            // Сбрасываем корзину
             selectedProducts = [];
             cartCountSpan.textContent = '0';
             cartPanel.classList.remove('show');
