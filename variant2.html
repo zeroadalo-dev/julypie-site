@@ -144,6 +144,21 @@
         .scroll-top.show { opacity: 1; visibility: visible; }
         .scroll-top:hover { background-color: #b08d1d; transform: translateY(-5px); }
 
+        /* Стили для кнопки в карточке товара */
+        .order-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 15px;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+        .order-btn:hover {
+            background-color: var(--gold);
+            color: var(--white);
+        }
+
         /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 768px) {
             .hero { flex-direction: column; padding: 40px 0; text-align: center; }
@@ -226,6 +241,8 @@
                     <h3 class="card-title">Торт «Ванильный пломбир»</h3>
                     <p class="card-desc">Нежные ванильные коржи, крем-чиз на основе сливочного сыра и сливок, украшение из свежих ягод.</p>
                     <div class="card-price">от 3 500 ₽</div>
+             <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -234,6 +251,8 @@
                     <h3 class="card-title">Торт «Шоколадный трюфель»</h3>
                     <p class="card-desc">Влажные шоколадные коржи на основе какао, крем из темного шоколада и сливок, трюфельная крошка.</p>
                     <div class="card-price">от 4 000 ₽</div>
+             <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -242,6 +261,8 @@
                     <h3 class="card-title">Бенто «Розовый сад»</h3>
                     <p class="card-desc">Маленький торт с ванильным бисквитом, кремом из маскарпоне и декором из розового крема.</p>
                     <div class="card-price">от 1 200 ₽</div>
+              <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                <button class="btn order-btn" data-product="Бенто «Розовый сад»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -250,6 +271,8 @@
                     <h3 class="card-title">Бенто «Клубника-сливки»</h3>
                     <p class="card-desc">Легкий бисквит, взбитые сливки и свежая клубника. Идеальный вариант для маленького праздника.</p>
                     <div class="card-price">от 1 300 ₽</div>
+               <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -258,6 +281,8 @@
                     <h3 class="card-title">Бенто «Фисташка-малина»</h3>
                     <p class="card-desc">Фисташковый бисквит, крем с пастой из фисташек и малиновый конфитюр внутри.</p>
                     <div class="card-price">от 1 400 ₽</div>
+               <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -266,6 +291,8 @@
                     <h3 class="card-title">Капкейки «Ассорти»</h3>
                     <p class="card-desc">Набор из 6 капкейков: ваниль, шоколад и клубника. Нежный крем-чиз и ягодный декор. (Цена за набор).</p>
                     <div class="card-price">от 1 200 ₽</div>
+                <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Капкейки «Ассорти»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -274,6 +301,8 @@
                     <h3 class="card-title">Десерт «Павлова»</h3>
                     <p class="card-desc">Хрустящая меренга, нежный сливочный крем и свежие сезонные фрукты. (Цена за 1 шт).</p>
                     <div class="card-price">от 350 ₽</div>
+                <!-- ДОБАВЛЯЕМ КНОПКУ -->
+                    <button class="btn order-btn" data-product="Десерт «Павлова»">Заказать</button>
                 </div>
             </div>
         </div>
@@ -433,6 +462,28 @@
         scrollTopBtn.addEventListener('click', function(e) {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+                // Логика для кнопок "Заказать" в карточках
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const productInput = document.getElementById('product');
+        const orderSection = document.getElementById('order');
+
+        orderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Получаем название товара из атрибута data-product
+                const productName = this.getAttribute('data-product');
+                
+                // Вписываем его в поле "Что заказать?"
+                productInput.value = productName;
+                
+                // Плавно прокручиваем к форме
+                orderSection.scrollIntoView({ behavior: 'smooth' });
+                
+                // Ставим курсор в поле "Имя", чтобы клиенту было удобно печатать
+                setTimeout(() => {
+                    document.getElementById('name').focus();
+                }, 800); // Задержка, чтобы прокрутка успела завершиться
+            });
         });
     </script>
 </body>
