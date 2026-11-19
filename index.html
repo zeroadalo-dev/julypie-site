@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JulyPie | Домашняя кондитерская в Хабаровске</title>
     
+    <!-- ИКОНКА САЙТА -->
     <link rel="icon" href="favicon.png" type="image/png">
 
+    <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
+    <!-- БИБЛИОТЕКА АНИМАЦИИ -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -23,26 +26,24 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* --- ГЛОБАЛЬНЫЙ ФОН САЙТА --- */
+        /* --- ГЛОБАЛЬНЫЙ ФОН --- */
         body { 
             font-family: 'Montserrat', sans-serif; 
             color: var(--text); 
             line-height: 1.6; 
-            
-            /* ФОНОВОЕ ФОТО */
             background-image: url('order-bg.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-color: var(--bg); /* Запасной цвет */
+            background-color: var(--bg);
         }
 
-        /* Полупрозрачный слой поверх всего сайта, чтобы текст читался */
+        /* Полупрозрачный слой */
         body::before {
             content: '';
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(253, 246, 240, 0.85); /* Кремовый слой 85% */
+            background-color: rgba(253, 246, 240, 0.85);
             z-index: -1;
         }
 
@@ -64,70 +65,33 @@
         .header-phone { font-weight: 600; color: var(--text); text-decoration: none; }
         .header-phone:hover { color: var(--gold); }
 
-        /* --- ГЕРОЙ --- */
+        /* --- ГЕРОЙ (КРУГЛОЕ ФОТО) --- */
         .hero { padding: 80px 0; display: flex; align-items: center; gap: 50px; }
         .hero-text { flex: 1; }
         .hero-text h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
-        /* Новые стили для подзаголовка в герое */
-        .hero-subtitle {
-            margin-bottom: 30px;
-        }
-        .hero-line-1 {
-            font-size: 18px;
-            font-weight: 600; /* Полужирный */
-            color: var(--text);
-            margin-bottom: 10px; /* Отступ от первой строки до курсива */
-        }
-        .hero-line-italic {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; /* Курсив */
-            font-size: 18px;
-            color: var(--text); /* Оставил основным цветом, чтобы смотрелось строго. Если захочешь золотой - поменяй на var(--gold) */
-            line-height: 1.5;
-            opacity: 0.9;
-        }
-        .hero-line-3 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic; /* Курсив */
-            font-size: 18px;
-            color: var(--gold); /* Можно сделать золотым для красоты, или оставить основным цветом */
-            opacity: 0.9;
-        }
-        .hero-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 500px; background-color: var(--white); }
-        .hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+        
+        .hero-subtitle { margin-bottom: 30px; }
+        .hero-line-1 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+        .hero-line-italic { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--text); line-height: 1.5; opacity: 0.9; }
 
-        /* --- О НАС (Стеклянный блок) --- */
+        .hero-image { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-image img { 
+            width: 400px; height: 400px; object-fit: cover; 
+            border-radius: 50%;
+            border: 8px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 4px var(--gold), 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        /* --- О НАС --- */
         .about { padding: 80px 0; }
-        .about-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 30px; 
-            text-align: center; 
-        }
-        .about-item { 
-            background-color: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(10px);
-            padding: 30px; 
-            border-radius: 20px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+        .about-item { background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255, 255, 255, 0.6); }
         .about-item h3 { color: var(--gold); margin-bottom: 10px; font-size: 22px; }
 
         /* --- МЕНЮ --- */
         .menu { padding: 80px 0; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { 
-            background-color: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(10px);
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
-            transition: 0.3s; 
-            display: flex; 
-            flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
+        .card { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid rgba(255, 255, 255, 0.6); }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); background-color: rgba(255, 255, 255, 0.95); }
         .card-img { width: 100%; height: 250px; object-fit: cover; }
         .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
@@ -135,43 +99,34 @@
         .card-desc { font-size: 14px; opacity: 0.8; margin-bottom: 20px; flex: 1; }
         .card-price { font-weight: 600; font-size: 18px; color: var(--gold); }
 
-        /* --- ДОСТАВКА (Стеклянный блок) --- */
-        .delivery { padding: 80px 0; }
-        .delivery-info { 
-            max-width: 700px; 
-            margin: 0 auto; 
-            text-align: center; 
-            font-size: 16px; 
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+        /* --- КНОПКА В КАРТОЧКЕ И КОРЗИНА --- */
+        .order-btn { width: 100%; margin-top: 15px; padding: 10px 20px; font-size: 15px; background-color: transparent; color: var(--gold); border: 2px solid var(--gold); transition: 0.3s; }
+        .order-btn:hover { background-color: var(--gold); color: var(--white); }
+        .order-btn.added { background-color: var(--gold); color: var(--white); }
+
+        .cart-panel {
+            position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%);
+            background-color: var(--text); color: var(--white); padding: 15px 30px;
+            border-radius: 30px; display: flex; align-items: center; gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 1000;
+            transition: bottom 0.4s ease; width: 90%; max-width: 500px; justify-content: space-between;
         }
+        .cart-panel.show { bottom: 30px; }
+        .cart-panel-info { font-size: 14px; font-weight: 600; }
+        .cart-panel .btn { padding: 8px 15px; font-size: 14px; background-color: var(--gold); color: var(--text); }
+        .cart-panel .btn:hover { background-color: var(--white); }
+
+        /* --- ДОСТАВКА --- */
+        .delivery { padding: 80px 0; }
+        .delivery-info { max-width: 700px; margin: 0 auto; text-align: center; font-size: 16px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid rgba(255, 255, 255, 0.6); }
         .delivery-info p { margin-bottom: 15px; }
 
         /* --- ФОРМА ЗАКАЗА --- */
-        .order-form { padding: 80px 0; position: relative; }
-        /* Убираем отдельный фон для формы, так как фон теперь у всего сайта */
-        
-        .form-wrapper { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            background-color: rgba(255, 255, 255, 0.9); 
-            backdrop-filter: blur(15px); 
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-        }
-        
+        .order-form { padding: 80px 0; }
+        .form-wrapper { max-width: 600px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.6); }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
-        .form-group input, .form-group textarea { 
-            width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 16px; 
-            background-color: rgba(255, 255, 255, 0.8);
-        }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 16px; background-color: rgba(255, 255, 255, 0.8); }
         .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); background-color: var(--white); }
         .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
         .checkbox-group input { margin-top: 3px; }
@@ -203,6 +158,7 @@
         .scroll-top.show { opacity: 1; visibility: visible; }
         .scroll-top:hover { background-color: #b08d1d; transform: translateY(-5px); }
 
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 768px) {
             .hero { flex-direction: column; padding: 40px 0; text-align: center; }
             .hero-text h1 { font-size: 32px; }
@@ -213,7 +169,11 @@
             .form-wrapper { padding: 25px 15px; }
             .modal-content { padding: 25px 15px; }
             .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
-            body { background-attachment: scroll; } /* Фикс для мобильных */
+            body { background-attachment: scroll; }
+            .hero-image img { width: 300px; height: 300px; }
+            
+            .cart-panel { padding: 12px 20px; flex-direction: column; gap: 10px; text-align: center; }
+            .cart-panel.show { bottom: 15px; }
         }
     </style>
 </head>
@@ -234,7 +194,7 @@
     <section class="hero container" data-aos="fade-up">
         <div class="hero-text">
             <h1>Печем счастье по домашним рецептам</h1>
-                 <div class="hero-subtitle">
+            <div class="hero-subtitle">
                 <p class="hero-line-1">Торты, бенто, капкейки и десерты на заказ.</p>
                 <p class="hero-line-italic">Маленькие партии, натуральные ингредиенты<br>и тепло рук, которые их сделали.</p>
             </div>
@@ -276,6 +236,7 @@
                     <h3 class="card-title">Торт «Ванильный пломбир»</h3>
                     <p class="card-desc">Нежные ванильные коржи, крем-чиз на основе сливочного сыра и сливок, украшение из свежих ягод.</p>
                     <div class="card-price">от 3 500 ₽</div>
+                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -284,6 +245,7 @@
                     <h3 class="card-title">Торт «Шоколадный трюфель»</h3>
                     <p class="card-desc">Влажные шоколадные коржи на основе какао, крем из темного шоколада и сливок, трюфельная крошка.</p>
                     <div class="card-price">от 4 000 ₽</div>
+                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -292,6 +254,7 @@
                     <h3 class="card-title">Бенто «Розовый сад»</h3>
                     <p class="card-desc">Маленький торт с ванильным бисквитом, кремом из маскарпоне и декором из розового крема.</p>
                     <div class="card-price">от 1 200 ₽</div>
+                    <button class="btn order-btn" data-product="Бенто «Розовый сад»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -300,6 +263,7 @@
                     <h3 class="card-title">Бенто «Клубника-сливки»</h3>
                     <p class="card-desc">Легкий бисквит, взбитые сливки и свежая клубника. Идеальный вариант для маленького праздника.</p>
                     <div class="card-price">от 1 300 ₽</div>
+                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -308,6 +272,7 @@
                     <h3 class="card-title">Бенто «Фисташка-малина»</h3>
                     <p class="card-desc">Фисташковый бисквит, крем с пастой из фисташек и малиновый конфитюр внутри.</p>
                     <div class="card-price">от 1 400 ₽</div>
+                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -316,6 +281,7 @@
                     <h3 class="card-title">Капкейки «Ассорти»</h3>
                     <p class="card-desc">Набор из 6 капкейков: ваниль, шоколад и клубника. Нежный крем-чиз и ягодный декор. (Цена за набор).</p>
                     <div class="card-price">от 1 200 ₽</div>
+                    <button class="btn order-btn" data-product="Капкейки «Ассорти»">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -324,10 +290,17 @@
                     <h3 class="card-title">Десерт «Павлова»</h3>
                     <p class="card-desc">Хрустящая меренга, нежный сливочный крем и свежие сезонные фрукты. (Цена за 1 шт).</p>
                     <div class="card-price">от 350 ₽</div>
+                    <button class="btn order-btn" data-product="Десерт «Павлова»">Заказать</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- ПАНЕЛЬ КОРЗИНЫ -->
+    <div class="cart-panel" id="cartPanel">
+        <div class="cart-panel-info">Выбрано товаров: <span id="cartCount">0</span></div>
+        <button class="btn" id="goToOrderBtn">Оформить заказ</button>
+    </div>
 
     <!-- ДОСТАВКА -->
     <section class="delivery">
@@ -358,7 +331,7 @@
                     </div>
                     <div class="form-group">
                         <label for="product">Что заказать? *</label>
-                        <input type="text" id="product" required placeholder="Например: Бенто «Розовый сад»">
+                        <input type="text" id="product" required placeholder="Выберите товары в меню выше">
                     </div>
                     <div class="form-group">
                         <label for="weight">Вес или количество (шт.)</label>
@@ -407,7 +380,7 @@
             </div>
             
             <div class="map-container" data-aos="fade-up">
-                <iframe src="https://yandex.ru/map-widget/v1/?text=Хабаровск,%20ул.%20Пушкина,%2050&z=16" width="100%" height="400" frameborder="0" allowfullscreen="true"></iframe>
+                <iframe src="https://yandex.ru/map-widget/v1/?text=Хабаровск,%20ул.%20Муравьева-Амурского,%2015&z=16" width="100%" height="400" frameborder="0" allowfullscreen="true"></iframe>
             </div>
         </div>
     </section>
@@ -435,13 +408,58 @@
         </div>
     </div>
 
+    <!-- КНОПКА НАВЕРХ -->
     <a href="#" class="scroll-top" id="scrollTopBtn">↑</a>
 
+    <!-- БИБЛИОТЕКА АНИМАЦИИ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
         AOS.init({ duration: 800, once: true });
 
+        // --- ЛОГИКА КОРЗИНЫ ---
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const cartPanel = document.getElementById('cartPanel');
+        const cartCountSpan = document.getElementById('cartCount');
+        const goToOrderBtn = document.getElementById('goToOrderBtn');
+        const productInput = document.getElementById('product');
+        const orderSection = document.getElementById('order');
+
+        let selectedProducts = [];
+
+        orderButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const productName = this.getAttribute('data-product');
+                
+                if (this.classList.contains('added')) {
+                    this.classList.remove('added');
+                    this.textContent = 'Заказать';
+                    selectedProducts = selectedProducts.filter(item => item !== productName);
+                } else {
+                    this.classList.add('added');
+                    this.textContent = 'Добавлено ✓';
+                    selectedProducts.push(productName);
+                }
+
+                cartCountSpan.textContent = selectedProducts.length;
+
+                if (selectedProducts.length > 0) {
+                    cartPanel.classList.add('show');
+                } else {
+                    cartPanel.classList.remove('show');
+                }
+            });
+        });
+
+        goToOrderBtn.addEventListener('click', function() {
+            productInput.value = selectedProducts.join(', ');
+            orderSection.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                document.getElementById('name').focus();
+            }, 800);
+        });
+
+        // --- ОТПРАВКА ФОРМЫ В WHATSAPP ---
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             const name = document.getElementById('name').value;
@@ -466,8 +484,18 @@
             const whatsappUrl = `https://wa.me/${myPhone}?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
             this.reset();
+            
+            // Сбрасываем корзину после отправки
+            selectedProducts = [];
+            cartCountSpan.textContent = '0';
+            cartPanel.classList.remove('show');
+            orderButtons.forEach(btn => {
+                btn.classList.remove('added');
+                btn.textContent = 'Заказать';
+            });
         });
 
+        // --- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ ---
         const modal = document.getElementById('privacy-modal');
         const privacyLink = document.getElementById('privacy-link');
         const closeModalBtn = document.getElementById('close-modal');
@@ -476,6 +504,7 @@
         closeModalBtn.addEventListener('click', function() { modal.style.display = 'none'; });
         modal.addEventListener('click', function(e) { if (e.target === modal) { modal.style.display = 'none'; } });
 
+        // --- КНОПКА НАВЕРХ ---
         const scrollTopBtn = document.getElementById('scrollTopBtn');
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) { scrollTopBtn.classList.add('show'); } else { scrollTopBtn.classList.remove('show'); }
