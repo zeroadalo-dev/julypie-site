@@ -555,11 +555,10 @@
     </footer>
 
     <!-- СКРИПТ ДЛЯ ФОРМЫ (Пока просто выводит данные в консоль, позже подключим отправку) -->
-        <script>
+            <script>
         document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Останавливаем перезагрузку страницы
+            e.preventDefault(); 
             
-            // Собираем данные из полей формы
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const product = document.getElementById('product').value;
@@ -568,24 +567,25 @@
             const address = document.getElementById('address').value || 'самовывоз';
             const comment = document.getElementById('comment').value || 'нет';
             
-            // Формируем красивый текст сообщения
-            let message = `Здравствуйте! Хочу сделать заказ в JulyPie.%0A%0A`;
-            message += `👤 *Имя:* ${name}%0A`;
-            message += `📞 *Телефон:* ${phone}%0A`;
-            message += `🍰 *Заказ:* ${product}%0A`;
-            message += `⚖️ *Вес/Кол-во:* ${weight}%0A`;
-            message += `📅 *Дата:* ${date}%0A`;
-            message += `📍 *Адрес:* ${address}%0A`;
-            message += `💬 *Комментарий:* ${comment}`;
+            // Формируем текст сообщения (без эмодзи и с красивыми переносами)
+            let message = `Здравствуйте! Хочу сделать заказ в JulyPie.\n\n`;
+            message += `Имя: ${name}\n`;
+            message += `Телефон: ${phone}\n`;
+            message += `Заказ: ${product}\n`;
+            message += `Вес/Кол-во: ${weight}\n`;
+            message += `Дата: ${date}\n`;
+            message += `Адрес: ${address}\n`;
+            message += `Комментарий: ${comment}`;
             
             // Твой номер WhatsApp (без плюса и пробелов)
-            const myPhone = '79247072002'; 
+            const myPhone = '79247077300'; 
             
-            // Открываем WhatsApp с готовым сообщением
-            const whatsappUrl = `https://wa.me/${myPhone}?text=${message}`;
+            // Кодируем текст для передачи в ссылку
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${myPhone}?text=${encodedMessage}`;
+            
             window.open(whatsappUrl, '_blank');
             
-            // Очищаем форму после отправки
             this.reset();
         });
     </script>
