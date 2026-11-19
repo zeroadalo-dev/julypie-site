@@ -221,7 +221,7 @@
         <div class="container header-inner">
             <div class="logo logo-font">JulyPie</div>
             <div class="header-contacts">
-                <a href="tel:+79140000002" class="header-phone">+7 (914) ***-*-*2</a>
+                <a href="tel:+79147727592" class="header-phone">+7 (914) 772-75-92</a>
                 <a href="#order" class="btn">Заказать</a>
             </div>
         </div>
@@ -408,14 +408,14 @@
         <div class="container">
             <h2 class="section-title" data-aos="fade-up">Контакты</h2>
             <div class="contacts-links" data-aos="fade-up">
-                <a href="https://wa.me/79140000002" target="_blank" class="contact-link">
+                <a href="https://wa.me/79147727592" target="_blank" class="contact-link">
                     <span>📱 WhatsApp</span>
                 </a>
-                <a href="https://instagram.com/iulyy.pie" target="_blank" class="contact-link">
+                <a href="https://instagram.com/julyy.pie" target="_blank" class="contact-link">
                     <span>📸 Instagram</span>
                 </a>
-                <a href="tel:+79140000002" class="contact-link">
-                    <span>📞 +7 (914) ***-*-*2</span>
+                <a href="tel:+79147727592" class="contact-link">
+                    <span>📞 +7 (914) 772-75-92</span>
                 </a>
             </div>
             <div class="schedule" data-aos="fade-up">
@@ -448,7 +448,7 @@
             <p><strong>2. Цели сбора:</strong> Данные используются исключительно для связи с вами, уточнения деталей заказа и организации доставки.</p>
             <p><strong>3. Передача данных:</strong> Мы не передаем ваши данные третьим лицам. Данные передаются напрямую в мессенджер WhatsApp или Telegram при нажатии кнопки «Отправить заявку».</p>
             <p><strong>4. Согласие:</strong> Нажимая галочку согласия в форме заказа, вы подтверждаете свое согласие на обработку персональных данных в соответствии с ФЗ-152 «О персональных данных».</p>
-            <p><strong>5. Контакты:</strong> По всем вопросам вы можете связаться с нами по телефону +7 (914) ***-*-*2.</p>
+            <p><strong>5. Контакты:</strong> По всем вопросам вы можете связаться с нами по телефону +7 (914) 772-75-92.</p>
         </div>
     </div>
 
@@ -503,4 +503,138 @@
             orderSection.scrollIntoView({ behavior: 'smooth' });
             
             setTimeout(() => {
-                document.getElementById
+                document.getElementById('name').focus();
+            }, 800);
+        });
+
+        function renderCartInForm() {
+            if (selectedProducts.length === 0) {
+                selectedItemsBlock.style.display = 'none';
+                return;
+            }
+
+            selectedItemsBlock.style.display = 'block';
+            selectedItemsList.innerHTML = '';
+
+            selectedProducts.forEach((product, index) => {
+                const row = document.createElement('div');
+                row.className = 'cart-item-row';
+                
+                const isWeight = product.unit === 'кг';
+                const step = isWeight ? '0.5' : '1';
+                const min = isWeight ? '1' : '1'; 
+
+                row.innerHTML = `
+                    <span class="cart-item-name">${product.name}</span>
+                    <div class="cart-item-qty-wrapper">
+                        <input type="number" 
+                               class="cart-item-qty" 
+                               min="${min}" 
+                               step="${step}" 
+                               value="${isWeight ? '1.5' : '1'}" 
+                               data-name="${product.name}" 
+                               data-unit="${product.unit}"
+                               id="qty-${index}"
+                               oninvalid="this.setCustomValidity('${isWeight ? 'Укажите вес торта кратно 0,5 кг' : 'Укажите целое количество штук'}')"
+                               oninput="this.setCustomValidity('')">
+                        <span class="cart-item-unit">${product.unit}</span>
+                    </div>
+                `;
+                selectedItemsList.appendChild(row);
+            });
+        }
+
+        // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Отправка...';
+            submitBtn.disabled = true;
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value || 'не указана';
+            const address = document.getElementById('address').value || 'самовывоз';
+            const comment = document.getElementById('comment').value || 'нет';
+            
+            let orderDetails = '';
+            const qtyInputs = document.querySelectorAll('.cart-item-qty');
+            
+            if (qtyInputs.length > 0) {
+                qtyInputs.forEach(input => {
+                    const prodName = input.getAttribute('data-name');
+                    const prodUnit = input.getAttribute('data-unit');
+                    const qty = input.value;
+                    orderDetails += `${prodName} — ${qty} ${prodUnit}; `;
+                });
+            } else {
+                orderDetails = 'Корзина пуста';
+            }
+            
+            const formData = {
+                name: name,
+                phone: phone,
+                order: orderDetails,
+                date: date,
+                address: address,
+                comment: comment
+            };
+            
+            // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ОТ GOOGLE SCRIPT (заканчивается на /exec)
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxwbD94cL_ORDixriMLOTzo0pEAV4fzSZ4l8WaQqTQBCVormLN47bJMAAjUl68-geSXMA/exec';
+
+            fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                alert('Спасибо! Ваша заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.');
+                
+                this.reset();
+                selectedProducts = [];
+                cartCountSpan.textContent = '0';
+                cartPanel.classList.remove('show');
+                selectedItemsBlock.style.display = 'none';
+                
+                orderButtons.forEach(btn => {
+                    btn.classList.remove('added');
+                    btn.textContent = 'Заказать';
+                });
+            })
+            .catch((error) => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при отправке. Пожалуйста, напишите нам в WhatsApp или Telegram.');
+            })
+            .finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // --- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ ---
+        const modal = document.getElementById('privacy-modal');
+        const privacyLink = document.getElementById('privacy-link');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        privacyLink.addEventListener('click', function(e) { e.preventDefault(); modal.style.display = 'flex'; });
+        closeModalBtn.addEventListener('click', function() { modal.style.display = 'none'; });
+        modal.addEventListener('click', function(e) { if (e.target === modal) { modal.style.display = 'none'; } });
+
+        // --- КНОПКА НАВЕРХ ---
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) { scrollTopBtn.classList.add('show'); } else { scrollTopBtn.classList.remove('show'); }
+        });
+        scrollTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
