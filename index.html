@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JulyPie | Домашняя кондитерская в Хабаровске</title>
     
-    <!-- ИКОНКА САЙТА -->
     <link rel="icon" href="favicon.png" type="image/png">
 
-    <!-- ШРИФТЫ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- БИБЛИОТЕКА АНИМАЦИИ (AOS) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -25,17 +22,42 @@
             --white: #FFFFFF;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+        
+        /* --- ГЛОБАЛЬНЫЙ ФОН САЙТА --- */
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            color: var(--text); 
+            line-height: 1.6; 
+            
+            /* ФОНОВОЕ ФОТО */
+            background-image: url('order-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--bg); /* Запасной цвет */
+        }
+
+        /* Полупрозрачный слой поверх всего сайта, чтобы текст читался */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(253, 246, 240, 0.85); /* Кремовый слой 85% */
+            z-index: -1;
+        }
+
         h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 600; }
         .logo-font { font-family: 'Great Vibes', cursive; color: var(--gold); }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
         .btn { display: inline-block; background-color: var(--gold); color: var(--white); padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; font-size: 16px; }
         .btn:hover { background-color: #b08d1d; transform: translateY(-2px); }
+        
         .section-title { text-align: center; font-size: 36px; margin-bottom: 40px; color: var(--text); }
         .section-title::after { content: ''; display: block; width: 60px; height: 2px; background-color: var(--gold); margin: 15px auto 0; }
 
         /* --- ШАПКА --- */
-        header { background-color: var(--white); padding: 15px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        header { background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); padding: 15px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .header-inner { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 32px; }
         .header-contacts { display: flex; align-items: center; gap: 20px; }
@@ -47,83 +69,86 @@
         .hero-text { flex: 1; }
         .hero-text h1 { font-size: 48px; line-height: 1.2; margin-bottom: 20px; }
         .hero-text p { font-size: 18px; margin-bottom: 30px; opacity: 0.9; }
-        .hero-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 500px; }
+        .hero-image { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-height: 500px; background-color: var(--white); }
         .hero-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
 
-        /* --- О НАС --- */
-        .about { padding: 80px 0; background-color: var(--white); }
-        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center; }
+        /* --- О НАС (Стеклянный блок) --- */
+        .about { padding: 80px 0; }
+        .about-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 30px; 
+            text-align: center; 
+        }
+        .about-item { 
+            background-color: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(10px);
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
         .about-item h3 { color: var(--gold); margin-bottom: 10px; font-size: 22px; }
 
         /* --- МЕНЮ --- */
         .menu { padding: 80px 0; }
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background-color: var(--white); border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .card { 
+            background-color: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px);
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            transition: 0.3s; 
+            display: flex; 
+            flex-direction: column;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); background-color: rgba(255, 255, 255, 0.95); }
         .card-img { width: 100%; height: 250px; object-fit: cover; }
         .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .card-title { font-size: 22px; margin-bottom: 10px; }
         .card-desc { font-size: 14px; opacity: 0.8; margin-bottom: 20px; flex: 1; }
         .card-price { font-weight: 600; font-size: 18px; color: var(--gold); }
 
-        /* --- ДОСТАВКА --- */
-        .delivery { padding: 80px 0; background-color: var(--white); }
-        .delivery-info { max-width: 700px; margin: 0 auto; text-align: center; font-size: 16px; }
+        /* --- ДОСТАВКА (Стеклянный блок) --- */
+        .delivery { padding: 80px 0; }
+        .delivery-info { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            text-align: center; 
+            font-size: 16px; 
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
         .delivery-info p { margin-bottom: 15px; }
 
-        /* --- ФОРМА ЗАКАЗА (СТЕКЛЯННЫЙ ЭФФЕКТ) --- */
-        .order-form { 
-            padding: 80px 0; 
-            /* ФОНОВОЕ ФОТО */
-            background-image: url('order-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-        }
+        /* --- ФОРМА ЗАКАЗА --- */
+        .order-form { padding: 80px 0; position: relative; }
+        /* Убираем отдельный фон для формы, так как фон теперь у всего сайта */
         
-        /* Полупрозрачный слой поверх фото */
-        .order-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(253, 246, 240, 0.75); /* Кремовый цвет, 75% непрозрачности */
-            z-index: 1;
-        }
-
-        .order-form .container {
-            position: relative;
-            z-index: 2;
-        }
-
         .form-wrapper { 
             max-width: 600px; 
             margin: 0 auto; 
-            /* Стеклянный эффект */
-            background-color: rgba(255, 255, 255, 0.85); 
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px); /* Для Safari */
+            background-color: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(15px); 
             padding: 40px; 
             border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
         
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
         .form-group input, .form-group textarea { 
-            width: 100%; 
-            padding: 12px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 16px; 
-            background-color: rgba(255, 255, 255, 0.9); /* Чуть прозрачные поля ввода */
+            width: 100%; padding: 12px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 16px; 
+            background-color: rgba(255, 255, 255, 0.8);
         }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); background-color: var(--white); }
         .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
         .checkbox-group input { margin-top: 3px; }
         .form-wrapper .btn { width: 100%; }
@@ -131,17 +156,17 @@
         /* --- КОНТАКТЫ И КАРТА --- */
         .contacts { padding: 80px 0; text-align: center; }
         .contacts-links { display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap; }
-        .contact-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 600; font-size: 18px; }
-        .contact-link:hover { color: var(--gold); }
-        .schedule { margin-top: 20px; font-size: 16px; opacity: 0.8; }
-        .map-container { margin-top: 40px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .contact-link { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-weight: 600; font-size: 18px; background-color: rgba(255, 255, 255, 0.8); padding: 10px 20px; border-radius: 30px; transition: 0.3s; }
+        .contact-link:hover { color: var(--gold); background-color: var(--white); transform: translateY(-3px); }
+        .schedule { margin-top: 20px; font-size: 16px; opacity: 0.9; background-color: rgba(255, 255, 255, 0.8); display: inline-block; padding: 15px 30px; border-radius: 20px; }
+        .map-container { margin-top: 40px; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 5px solid rgba(255, 255, 255, 0.8); }
 
         /* --- ФУТЕР --- */
-        footer { background-color: var(--text); color: var(--white); padding: 30px 0; text-align: center; font-size: 12px; }
+        footer { background-color: rgba(74, 59, 50, 0.95); color: var(--white); padding: 30px 0; text-align: center; font-size: 12px; backdrop-filter: blur(10px); }
         footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
         footer a:hover { text-decoration: underline; }
 
-        /* --- МОДАЛЬНОЕ ОКНО (ПОЛИТИКА) --- */
+        /* --- МОДАЛЬНОЕ ОКНО --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; padding: 20px; }
         .modal-content { background: var(--white); padding: 40px; border-radius: 20px; max-width: 700px; max-height: 80vh; overflow-y: auto; position: relative; text-align: left; }
         .modal-content h2 { margin-bottom: 20px; font-size: 24px; }
@@ -150,13 +175,7 @@
         .close-modal:hover { color: var(--gold); }
 
         /* --- КНОПКА "НАВЕРХ" --- */
-        .scroll-top {
-            position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
-            background-color: var(--gold); color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            opacity: 0; visibility: hidden; transition: 0.3s; z-index: 999; font-size: 24px;
-        }
+        .scroll-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background-color: var(--gold); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); opacity: 0; visibility: hidden; transition: 0.3s; z-index: 999; font-size: 24px; }
         .scroll-top.show { opacity: 1; visibility: visible; }
         .scroll-top:hover { background-color: #b08d1d; transform: translateY(-5px); }
 
@@ -170,8 +189,7 @@
             .form-wrapper { padding: 25px 15px; }
             .modal-content { padding: 25px 15px; }
             .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 20px; }
-            /* На мобильных убираем фиксацию фона, чтобы не было глюков */
-            .order-form { background-attachment: scroll; }
+            body { background-attachment: scroll; } /* Фикс для мобильных */
         }
     </style>
 </head>
@@ -376,7 +394,7 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО ПОЛИТИКИ -->
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="privacy-modal">
         <div class="modal-content">
             <button class="close-modal" id="close-modal">&times;</button>
@@ -390,7 +408,6 @@
         </div>
     </div>
 
-    <!-- КНОПКА НАВЕРХ -->
     <a href="#" class="scroll-top" id="scrollTopBtn">↑</a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
