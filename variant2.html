@@ -544,31 +544,33 @@
             });
         }
 
-                // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
+                      // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
-            // ПРОВЕРКА: Если корзина пуста, не отправляем
-            if (selectedProducts.length === 0) {
-                alert('Вы ничего не выбрали! Пожалуйста, добавьте товары из меню или напишите свой заказ в комментариях.');
-                orderSection.scrollIntoView({ behavior: 'smooth' }); // Прокручиваем к форме/меню
-                return; // Останавливаем отправку
+            // Получаем значения полей
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value || 'не указана';
+            const address = document.getElementById('address').value || 'самовывоз';
+            const comment = document.getElementById('comment').value.trim(); // trim() убирает лишние пробелы
+            
+            // ПРОВЕРКА: Если корзина пуста И комментарий пуст, не отправляем
+            if (selectedProducts.length === 0 && comment === '') {
+                alert('Вы ничего не выбрали! Пожалуйста, добавьте товары из меню или опишите свой заказ в поле «Комментарий».');
+                orderSection.scrollIntoView({ behavior: 'smooth' }); 
+                return; 
             }
 
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Отправка...';
             submitBtn.disabled = true;
-
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value || 'не указана';
-            const address = document.getElementById('address').value || 'самовывоз';
-            const comment = document.getElementById('comment').value || 'нет';
             
             let orderDetails = '';
             const qtyInputs = document.querySelectorAll('.cart-item-qty');
             
+            // Собираем товары из корзины (если они есть)
             if (qtyInputs.length > 0) {
                 qtyInputs.forEach(input => {
                     const prodName = input.getAttribute('data-name');
@@ -576,6 +578,8 @@
                     const qty = input.value;
                     orderDetails += `${prodName} — ${qty} ${prodUnit}; `;
                 });
+            } else {
+                orderDetails = 'Индивидуальный заказ (по комментарию)'; // Если корзина пуста, но есть комментарий
             }
             
             const formData = {
@@ -584,10 +588,9 @@
                 order: orderDetails,
                 date: date,
                 address: address,
-                comment: comment
+                comment: comment || 'нет' // Если комментарий пуст, ставим прочерк
             };
             
-            // Ссылка от Google Script (твоя рабочая ссылка)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbxwbD94cL_ORDixriMLOTzo0pEAV4fzSZ4l8WaQqTQBCVormLN47bJMAAjUl68-geSXMA/exec';
 
             fetch(scriptUrl, {
