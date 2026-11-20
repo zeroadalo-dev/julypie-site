@@ -544,10 +544,17 @@
             });
         }
 
-        // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
+                // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
+            // ПРОВЕРКА: Если корзина пуста, не отправляем
+            if (selectedProducts.length === 0) {
+                alert('Вы ничего не выбрали! Пожалуйста, добавьте товары из меню или напишите свой заказ в комментариях.');
+                orderSection.scrollIntoView({ behavior: 'smooth' }); // Прокручиваем к форме/меню
+                return; // Останавливаем отправку
+            }
+
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Отправка...';
@@ -569,8 +576,6 @@
                     const qty = input.value;
                     orderDetails += `${prodName} — ${qty} ${prodUnit}; `;
                 });
-            } else {
-                orderDetails = 'Корзина пуста';
             }
             
             const formData = {
@@ -582,7 +587,7 @@
                 comment: comment
             };
             
-            // ВСТАВЬ СЮДА СВОЮ ССЫЛКУ ОТ GOOGLE SCRIPT (заканчивается на /exec)
+            // Ссылка от Google Script (твоя рабочая ссылка)
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbxwbD94cL_ORDixriMLOTzo0pEAV4fzSZ4l8WaQqTQBCVormLN47bJMAAjUl68-geSXMA/exec';
 
             fetch(scriptUrl, {
