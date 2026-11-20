@@ -165,6 +165,24 @@
             color: var(--text);
         }
 
+        /* Итоговая сумма */
+        .total-price-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            border: 1px dashed var(--gold);
+        }
+        .total-price-block strong {
+            font-size: 22px;
+            color: var(--gold);
+        }
+
         .checkbox-group { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; margin-bottom: 20px; }
         .checkbox-group input { margin-top: 3px; }
         .form-wrapper .btn { width: 100%; }
@@ -275,7 +293,7 @@
                     <h3 class="card-title">Торт «Ванильный пломбир»</h3>
                     <p class="card-desc">Нежные ванильные коржи, крем-чиз на основе сливочного сыра и сливок, украшение из свежих ягод.</p>
                     <div class="card-price">от 3 500 ₽/кг</div>
-                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»" data-unit="кг">Заказать</button>
+                    <button class="btn order-btn" data-product="Торт «Ванильный пломбир»" data-unit="кг" data-price="3500">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -284,7 +302,7 @@
                     <h3 class="card-title">Торт «Шоколадный трюфель»</h3>
                     <p class="card-desc">Влажные шоколадные коржи на основе какао, крем из темного шоколада и сливок, трюфельная крошка.</p>
                     <div class="card-price">от 4 000 ₽/кг</div>
-                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»" data-unit="кг">Заказать</button>
+                    <button class="btn order-btn" data-product="Торт «Шоколадный трюфель»" data-unit="кг" data-price="4000">Заказать</button>
                 </div>
             </div>
 
@@ -295,7 +313,7 @@
                     <h3 class="card-title">Бенто «Розовый сад»</h3>
                     <p class="card-desc">Маленький торт с ванильным бисквитом, кремом из маскарпоне и декором из розового крема.</p>
                     <div class="card-price">от 1 200 ₽</div>
-                    <button class="btn order-btn" data-product="Бенто «Розовый сад»" data-unit="шт.">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Розовый сад»" data-unit="шт." data-price="1200">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -304,7 +322,7 @@
                     <h3 class="card-title">Бенто «Клубника-сливки»</h3>
                     <p class="card-desc">Легкий бисквит, взбитые сливки и свежая клубника. Идеальный вариант для маленького праздника.</p>
                     <div class="card-price">от 1 300 ₽</div>
-                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»" data-unit="шт.">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Клубника-сливки»" data-unit="шт." data-price="1300">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -313,7 +331,7 @@
                     <h3 class="card-title">Бенто «Фисташка-малина»</h3>
                     <p class="card-desc">Фисташковый бисквит, крем с пастой из фисташек и малиновый конфитюр внутри.</p>
                     <div class="card-price">от 1 400 ₽</div>
-                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»" data-unit="шт.">Заказать</button>
+                    <button class="btn order-btn" data-product="Бенто «Фисташка-малина»" data-unit="шт." data-price="1400">Заказать</button>
                 </div>
             </div>
 
@@ -324,7 +342,7 @@
                     <h3 class="card-title">Капкейки «Ассорти»</h3>
                     <p class="card-desc">Набор из 6 капкейков: ваниль, шоколад и клубника. Нежный крем-чиз и ягодный декор. (Цена за набор).</p>
                     <div class="card-price">от 1 200 ₽</div>
-                    <button class="btn order-btn" data-product="Капкейки «Ассорти»" data-unit="набор">Заказать</button>
+                    <button class="btn order-btn" data-product="Капкейки «Ассорти»" data-unit="набор" data-price="1200">Заказать</button>
                 </div>
             </div>
             <div class="card" data-aos="fade-up">
@@ -333,7 +351,7 @@
                     <h3 class="card-title">Десерт «Павлова»</h3>
                     <p class="card-desc">Хрустящая меренга, нежный сливочный крем и свежие сезонные фрукты. (Цена за 1 шт).</p>
                     <div class="card-price">от 350 ₽</div>
-                    <button class="btn order-btn" data-product="Десерт «Павлова»" data-unit="шт.">Заказать</button>
+                    <button class="btn order-btn" data-product="Десерт «Павлова»" data-unit="шт." data-price="350">Заказать</button>
                 </div>
             </div>
         </div>
@@ -393,6 +411,13 @@
                         <label for="comment">Комментарий</label>
                         <textarea id="comment" rows="3" placeholder="Пожелания по декору, начинке и т.д."></textarea>
                     </div>
+
+                    <!-- Строка с итоговой суммой -->
+                    <div class="total-price-block" id="totalPriceBlock" style="display: none;">
+                        <span>Итого к оплате:</span>
+                        <strong><span id="totalPrice">0</span> ₽</strong>
+                    </div>
+
                     <div class="checkbox-group">
                         <input type="checkbox" id="agree" required>
                         <label for="agree">Я согласен(на) на обработку персональных данных и принимаю условия политики конфиденциальности.</label>
@@ -477,6 +502,7 @@
             button.addEventListener('click', function() {
                 const productName = this.getAttribute('data-product');
                 const productUnit = this.getAttribute('data-unit');
+                const productPrice = this.getAttribute('data-price');
                 
                 if (this.classList.contains('added')) {
                     this.classList.remove('added');
@@ -485,7 +511,7 @@
                 } else {
                     this.classList.add('added');
                     this.textContent = 'Добавлено ✓';
-                    selectedProducts.push({ name: productName, unit: productUnit });
+                    selectedProducts.push({ name: productName, unit: productUnit, price: productPrice });
                 }
 
                 cartCountSpan.textContent = selectedProducts.length;
@@ -510,10 +536,12 @@
         function renderCartInForm() {
             if (selectedProducts.length === 0) {
                 selectedItemsBlock.style.display = 'none';
+                document.getElementById('totalPriceBlock').style.display = 'none';
                 return;
             }
 
             selectedItemsBlock.style.display = 'block';
+            document.getElementById('totalPriceBlock').style.display = 'flex';
             selectedItemsList.innerHTML = '';
 
             selectedProducts.forEach((product, index) => {
@@ -534,26 +562,41 @@
                                value="${isWeight ? '1.5' : '1'}" 
                                data-name="${product.name}" 
                                data-unit="${product.unit}"
+                               data-price="${product.price}"
                                id="qty-${index}"
                                oninvalid="this.setCustomValidity('${isWeight ? 'Укажите вес торта кратно 0,5 кг' : 'Укажите целое количество штук'}')"
-                               oninput="this.setCustomValidity('')">
+                               oninput="this.setCustomValidity(''); calculateTotal();">
                         <span class="cart-item-unit">${product.unit}</span>
                     </div>
                 `;
                 selectedItemsList.appendChild(row);
             });
+            
+            calculateTotal();
         }
 
-                      // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
+        function calculateTotal() {
+            let total = 0;
+            const qtyInputs = document.querySelectorAll('.cart-item-qty');
+            
+            qtyInputs.forEach(input => {
+                const price = parseFloat(input.getAttribute('data-price')) || 0;
+                const qty = parseFloat(input.value) || 0;
+                total += price * qty;
+            });
+
+            document.getElementById('totalPrice').textContent = total.toLocaleString('ru-RU');
+        }
+
+        // --- ОТПРАВКА ФОРМЫ В TELEGRAM ---
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault(); 
             
-            // Получаем значения полей
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const date = document.getElementById('date').value || 'не указана';
             const address = document.getElementById('address').value || 'самовывоз';
-            const comment = document.getElementById('comment').value.trim(); // trim() убирает лишние пробелы
+            const comment = document.getElementById('comment').value.trim();
             
             // ПРОВЕРКА: Если корзина пуста И комментарий пуст, не отправляем
             if (selectedProducts.length === 0 && comment === '') {
@@ -570,7 +613,6 @@
             let orderDetails = '';
             const qtyInputs = document.querySelectorAll('.cart-item-qty');
             
-            // Собираем товары из корзины (если они есть)
             if (qtyInputs.length > 0) {
                 qtyInputs.forEach(input => {
                     const prodName = input.getAttribute('data-name');
@@ -579,16 +621,24 @@
                     orderDetails += `${prodName} — ${qty} ${prodUnit}; `;
                 });
             } else {
-                orderDetails = 'Индивидуальный заказ (по комментарию)'; // Если корзина пуста, но есть комментарий
+                orderDetails = 'Индивидуальный заказ (по комментарию)'; 
+            }
+            
+            // Добавляем итоговую сумму в сообщение
+            const totalPrice = document.getElementById('totalPrice').textContent;
+            const totalBlock = document.getElementById('totalPriceBlock');
+            let totalText = '';
+            if (totalBlock.style.display !== 'none') {
+                totalText = `\nСумма: ${totalPrice} ₽`;
             }
             
             const formData = {
                 name: name,
                 phone: phone,
-                order: orderDetails,
+                order: orderDetails + totalText,
                 date: date,
                 address: address,
-                comment: comment || 'нет' // Если комментарий пуст, ставим прочерк
+                comment: comment || 'нет'
             };
             
             const scriptUrl = 'https://script.google.com/macros/s/AKfycbxwbD94cL_ORDixriMLOTzo0pEAV4fzSZ4l8WaQqTQBCVormLN47bJMAAjUl68-geSXMA/exec';
@@ -609,6 +659,7 @@
                 cartCountSpan.textContent = '0';
                 cartPanel.classList.remove('show');
                 selectedItemsBlock.style.display = 'none';
+                document.getElementById('totalPriceBlock').style.display = 'none';
                 
                 orderButtons.forEach(btn => {
                     btn.classList.remove('added');
